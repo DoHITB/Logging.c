@@ -150,7 +150,6 @@ void _log(char* text, ...) {
 
   int lv = va_arg(pa, int);
   int write = 0;
-  int clc;
 
   //if there's no "activateLog", we'll do it with default value
   if (IS_ON == 0)
