@@ -168,15 +168,14 @@ void _log(char* text, ...) {
   if (DEBUG > lv)
     return;
 
-  //set the tabulation
-  printTab();
-
   //print current execution tick (clock)
   if (IS_FILE == 1) 
     fprintf(fl, "%i:\t", clock());
   else
     printf("%d:\t", clock()); 
 
+  //set the tabulation
+  printTab();
 
   //print the content, printf style
   for (p = text; *p; p++) 
