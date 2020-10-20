@@ -85,7 +85,7 @@ static void openFile() {
     efl = fopen_s(&fl, rt, "w+");
 
     if (efl != 0) {
-      printf("Error on file open... going with printf\n");
+      printf("Error on file open [%s]... going with printf\n", rt);
       IS_FILE = 0;
     }
   }
