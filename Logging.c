@@ -47,6 +47,10 @@ static int IS_OPEN = 0;
  */
 static FILE* fl;
 
+/*
+ * showTime: indicates to show time (clock() function)
+ */
+static int showTime = 1;
 
 /*
  * inFunction: increases CURR_DEPTH
@@ -128,6 +132,18 @@ void setFile(char* route) {
 }
 
 /*
+ * setShowTime: sets an indicator to show time (clock() function).
+ * 1: show; 0: don't show. If "st" have neither values, an 1 it's assumed.
+ */
+void setShowTime(int st) {
+    if (st == 0 || st == 1) {
+        showTime = st;
+    }else {
+        showTime = 1;
+    }
+}
+
+/*
  * printTab: sets the tabulation, based on CURRDEPTH
  */
 static void printTab() {
@@ -167,11 +183,13 @@ void _log(char* text, ...) {
   if (DEBUG > lv)
     return;
 
-  //print current execution tick (clock)
-  if (IS_FILE == 1) 
-    fprintf(fl, "%i:\t", clock());
-  else
-    printf("%d:\t", clock()); 
+  //print current execution tick (clock) only if wanted
+  if (showTime == 1) {
+      if (IS_FILE == 1)
+          fprintf(fl, "%i:\t", clock());
+      else
+          printf("%d:\t", clock());
+  }
 
   //set the tabulation
   printTab();
