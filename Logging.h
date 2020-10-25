@@ -18,6 +18,8 @@ static void closeFile();
 void inFunction();
 void outFunction();
 
+void setShowTime(int st);
+
 static void printTab();
 void _log(char* text, ...);
 
