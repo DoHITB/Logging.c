@@ -24,7 +24,7 @@ Now you can start ```_log()```ing things (with ```printf()``` format):
     _log("This is the value for i: %i", INFORMATIONAL, i);
     
 Just put your text, ```printf()``` style, putting **always** level variable on the first position.
-The output will contain ```clock()``` value, followed by the passed information:
+The output may contain ```clock()``` value, followed by the passed information (can be turned off using ```setShowTime``` function):
 
     220:    This is the value for i: 10
     
@@ -63,6 +63,7 @@ Will return something like:
                                                                             171:    This is the value for i: 9
                                                                             
 You can stop logging with ```deactivateLog()``` function, at any time.
+Also, yo can also ```closeFile()``` anytime and start logging again, using same file, another file, or just dumping to the console.
 
 So, it's simple and fast. Easy to use and ready to go.
 
