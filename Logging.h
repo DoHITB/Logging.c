@@ -13,7 +13,7 @@ void activateLog(int level);
 static void openFile();
 
 void deactivateLog();
-static void closeFile();
+void closeFile();
 
 void inFunction();
 void outFunction();
