@@ -75,6 +75,8 @@ void activateLog(int level) {
 
   if (IS_FILE == 1)
     openFile();
+
+  _log("CLOCKS_PER_SEC: %i", 999, CLOCKS_PER_SEC);
 }
 
 /*
@@ -86,7 +88,7 @@ static void openFile() {
   if (IS_OPEN == 0) {
     IS_OPEN = 1;
 
-    efl = fopen_s(&fl, rt, "w+");
+    efl = fopen_s(&fl, rt, "a");
 
     if (efl != 0) {
       printf("Error on file open [%s]... going with printf\n", rt);
@@ -102,16 +104,17 @@ void deactivateLog() {
   IS_ON = -1;
   DEBUG = -1;
 
-  if (IS_FILE == 1) 
+  if (IS_FILE == 1)
     closeFile();
 }
 
 /*
  * closeFile: closes file handler fl
  */
-static void closeFile() {
+void closeFile() {
   if (IS_OPEN == 1) {
     IS_OPEN = 0;
+    fflush(fl);
     fclose(fl);
   }
 }
@@ -138,7 +141,7 @@ void setFile(char* route) {
 void setShowTime(int st) {
     if (st == 0 || st == 1) {
         showTime = st;
-    }else {
+    } else {
         showTime = 1;
     }
 }
@@ -167,6 +170,10 @@ void _log(char* text, ...) {
   int lv = va_arg(pa, int);
   int write = 0;
 
+  //if the current DEBUG it's greater than lv, do not log
+  if (DEBUG > lv)
+    return;
+
   //if there's no "activateLog", we'll do it with default value
   if (IS_ON == 0)
     activateLog(0);
@@ -178,10 +185,6 @@ void _log(char* text, ...) {
   //if no file was open, open it
   if (IS_FILE == 1)
     openFile();
-
-  //if the current DEBUG it's greater than lv, do not log
-  if (DEBUG > lv)
-    return;
 
   //print current execution tick (clock) only if wanted
   if (showTime == 1) {
